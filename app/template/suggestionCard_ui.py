@@ -8,22 +8,24 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+from PyQt5.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
-    QPushButton, QSizePolicy, QSpacerItem, QTreeWidget,
-    QTreeWidgetItem, QVBoxLayout, QWidget)
+from PyQt5.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
+    QPushButton, QSizePolicy, QSpacerItem, QTreeView,
+    QVBoxLayout, QWidget)
 
 class Ui_Card(object):
     def setupUi(self, Card):
         if not Card.objectName():
             Card.setObjectName(u"Card")
         Card.resize(320, 240)
+        Card.setAutoFillBackground(False)
+        Card.setLocale(QLocale(QLocale.English, QLocale.UnitedStates))
         self.verticalLayout = QVBoxLayout(Card)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout_2 = QHBoxLayout()
@@ -41,10 +43,10 @@ class Ui_Card(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        self.treeWidget = QTreeWidget(Card)
-        self.treeWidget.setObjectName(u"treeWidget")
+        self.treeView = QTreeView(Card)
+        self.treeView.setObjectName(u"treeView")
 
-        self.verticalLayout.addWidget(self.treeWidget)
+        self.verticalLayout.addWidget(self.treeView)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
