@@ -12,7 +12,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self) -> None:
         super(MainWindow, self).__init__()
 
-        # self.suggestionCards = []
+        self._KEEP_ORGINAL_FILE = True # don't delete files after moved
 
         #### SETUP ####
 
@@ -37,7 +37,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
             # Sort by length of the list
             clusters = dict(sorted(clusters.items(), key=lambda item: len(item[1]), reverse=True))
 
-            c = 0 # For Debug
+            # c = 0 # For Debug
             
             logging.info("Found {} clusters".format(len(clusters)))
             for i, files_in_cluster in clusters.items():
@@ -45,15 +45,16 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                 if i != -1: # Except Outlier
                     
                     card = SuggestionCard(
+                        foldername='Folder' + str(i),
                         filter=files_in_cluster,
-                        path=os.path.join(os.path.expanduser('~'), 'Downloads') # Fix later
+                        path=os.path.join(os.path.expanduser('~'), 'Downloads'), # Fix later
                     )
                     self.suggestionSlot.addWidget(card)
 
                     logging.info("Cluster {} ({}): {}".format(i, len(files_in_cluster), files_in_cluster))
                 
-                if c >= 3: break # For Debug
-                c += 1; print(c)
+                # if c >= 3: break # For Debug
+                # c += 1; print(c) # For Debug
 
 
     def handleOpenFolder(self): 
