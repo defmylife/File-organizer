@@ -17,9 +17,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         #### SETUP ####
 
         super().setupUi(self)
-        # self.app = Ui_MainWindow()
-        # self.app.setupUi(self)
-        
+        self.resize(720, 720)
         # self.header.setStyleSheet("QWidget {background-color: #FFF}")
 
         #### CONNECTIONS ####
@@ -70,7 +68,9 @@ if __name__=='__main__':
     window = MainWindow()
 
     # setup stylesheet
+    apply_stylesheet(window, theme='app/theme/light.xml')
     # apply_stylesheet(app, theme='light_amber.xml')
+    # apply_stylesheet(app, theme='dark_amber.xml')
 
     # run
     window.show()

@@ -64,8 +64,8 @@ if __name__=='__main__':
     )
 
     # setup stylesheet
-    # apply_stylesheet(app, theme='light_amber.xml')
-    # app.resize(400, 400)
+    apply_stylesheet(app, theme='app/theme/light.xml')
+    card.resize(600, 300)
 
     # run
     card.show()
