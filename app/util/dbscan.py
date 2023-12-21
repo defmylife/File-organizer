@@ -1,8 +1,10 @@
-import os, pprint
+import sys, os, pprint
+from typing import List, Union, Dict
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import DBSCAN
+from util.getFiles import *
 
-def list_files(path):
+'''def list_files(path):
     try:
         # Get all files in the directory
         files = [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
@@ -10,8 +12,10 @@ def list_files(path):
         
     except FileNotFoundError:
         print("The specified path was not found.")
+'''
 
-def cluster_files(files):
+def dbscan(files :list) -> Union[Dict, List[str]]:
+
     # Convert file names into TF-IDF features
     vectorizer = TfidfVectorizer(stop_words='english')
     X = vectorizer.fit_transform(files)
@@ -33,19 +37,20 @@ def cluster_files(files):
 
     return clusters, outliers
 
-# Replace 'Downloads' with the desired directory path
-directory_path = 'Downloads'
-file_names = list_files(directory_path)
+if __name__=='__main__':
+    # Replace 'Downloads' with the desired directory path
+    directory_path = r'C:\Users\uSeR\Downloads'
+    file_names, _ = getFiles(directory_path)
 
-if file_names:
-    clusters, outliers = cluster_files(file_names)
-    
-    print("Files in each cluster ({}):".format(len(clusters)))
-    for i, files_in_cluster in clusters.items():
-        if i != -1:
-            print("Cluster {} ({}): {}".format(i, len(files_in_cluster), files_in_cluster))
+    if file_names:
+        clusters, outliers = dbscan(file_names)
+        
+        print("Files in each cluster ({}):".format(len(clusters)))
+        for i, files_in_cluster in clusters.items():
+            if i != -1:
+                print("Cluster {} ({}): {}".format(i, len(files_in_cluster), files_in_cluster))
 
-    print("\nOutlier file names ({}):".format(len(outliers)))
-    pprint.pprint(outliers)
-else:
-    print("No files found in the specified path.")
+        print("\nOutlier file names ({}):".format(len(outliers)))
+        pprint.pprint(outliers)
+    else:
+        print("No files found in the specified path.")
