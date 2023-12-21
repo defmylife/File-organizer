@@ -35,9 +35,11 @@ class SuggestionCard(Ui_Card, QFrame):
         self.treeView.setModel(self.dirModel)
         self.treeView.setRootIndex(self.dirModel.index(self.path))
         
-        self.resize(400, 400)
         # Resize the first column in the tree view
         self.treeView.header().resizeSection(0, 200)
+        # height = 21
+        # self.treeView.setMinimumHeight(int(height * len(self.filenames)) + 25) # 25 is header size
+        self.treeView.setMinimumHeight(200)
 
 
 if __name__=='__main__':
@@ -63,6 +65,7 @@ if __name__=='__main__':
 
     # setup stylesheet
     # apply_stylesheet(app, theme='light_amber.xml')
+    # app.resize(400, 400)
 
     # run
     card.show()
